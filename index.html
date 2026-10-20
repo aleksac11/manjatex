@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="MANJATEX – proizvodnja kućnog tekstila: posteljina, jorgani, jastuci, stolnjaci i zavese. Izrada po meri.">
+<meta name="theme-color" content="#EEE8DE">
+<meta property="og:title" content="MANJATEX – kućni tekstil">
+<meta property="og:description" content="Posteljina, jorgani, jastuci, stolnjaci i zavese. Izrada po meri.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+html{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;-webkit-text-size-adjust:100%}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>MANJATEX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+/* Layout: lanena podloga, tanka geometrijska slova kao u logou, tkanine kao CSS uzorci; sekcije se smenjuju između podloge i svetlije površine */
+:root{
+  --bg:#EEE8DE; --surface:#F8F4EE; --ink:#2A2520; --muted:#6C6358; --line:rgba(42,37,32,.14);
+  --accent:#56653F; --accent-ink:#FBF8F2; --accent-soft:rgba(86,101,63,.12); --ok:#3F7A4C;
+  --f-display:"Jost","Futura","Century Gothic",system-ui,sans-serif;
+  --f-body:"Newsreader","Iowan Old Style","Georgia",serif;
+  --wrap:1180px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D1A17; --surface:#26221E; --ink:#ECE5DA; --muted:#A79D90; --line:rgba(236,229,218,.14);
+  --accent:#AAB98E; --accent-ink:#1D1A17; --accent-soft:rgba(170,185,142,.14); --ok:#8FC59A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1D1A17; --surface:#26221E; --ink:#ECE5DA; --muted:#A79D90; --line:rgba(236,229,218,.14);
+  --accent:#AAB98E; --accent-ink:#1D1A17; --accent-soft:rgba(170,185,142,.14); --ok:#8FC59A; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:300;line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4.2vw,3.1rem);letter-spacing:.01em}
+h3{font-size:1.25rem;font-weight:400}
+p{margin:0}
+.eyebrow{font-family:var(--f-display);font-size:.78rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:1.2rem;color:var(--muted);max-width:58ch}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--f-display);font-size:.9rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  padding:.95em 1.6em;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;transition:background .2s,color .2s}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.solid:hover{filter:brightness(1.08);background:var(--accent);color:var(--accent-ink)}
+
+/* Header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:24px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo svg{width:34px;height:24px}
+.logo span{font-family:var(--f-display);font-weight:300;font-size:1.35rem;letter-spacing:.06em}
+nav.main{display:flex;gap:28px;margin-left:auto}
+nav.main a{font-family:var(--f-display);font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s}
+nav.main a:hover{color:var(--ink)}
+.tools{display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid var(--line)}
+.lang button{font-family:var(--f-display);font-size:.78rem;letter-spacing:.1em;padding:.45em .7em;border:0;background:none;color:var(--muted);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.bag{position:relative;font-family:var(--f-display);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.55em .9em;border:1px solid var(--ink);white-space:nowrap}
+.bag b{display:inline-grid;place-items:center;min-width:1.5em;height:1.5em;margin-left:.4em;background:var(--accent);color:var(--accent-ink);border-radius:999px;font-weight:500;font-size:.78rem;font-variant-numeric:tabular-nums}
+.menu-btn{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;cursor:pointer;color:var(--ink)}
+@media (max-width:960px){
+  nav.main{display:none;position:absolute;left:0;right:0;top:72px;flex-direction:column;gap:0;background:var(--surface);border-bottom:1px solid var(--line);padding:8px max(20px,env(safe-area-inset-right,0px)) 16px max(20px,env(safe-area-inset-left,0px))}
+  nav.main.open{display:flex}
+  nav.main a{padding:12px 0;border-bottom:1px solid var(--line)}
+  .menu-btn{display:grid;place-items:center}
+  .tools{margin-left:auto}
+}
+@media (max-width:440px){.bag .bag-label{display:none}.logo span{font-size:1.15rem}.top .wrap{gap:12px}}
+
+/* Fabric swatches (placeholder fotografije) */
+.sw{--c1:#D9CFC0;--c2:#C7BBA8;background-color:var(--c1);position:relative;overflow:hidden}
+.sw::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.18),transparent 40%,rgba(0,0,0,.08));pointer-events:none}
+.sw-linen{background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 1px,transparent 1px 4px)}
+.sw-stripe{background-image:repeating-linear-gradient(90deg,var(--c2) 0 10px,transparent 10px 30px),repeating-linear-gradient(0deg,rgba(0,0,0,.04) 0 1px,transparent 1px 3px)}
+.sw-check{background-image:repeating-linear-gradient(0deg,color-mix(in srgb,var(--c2) 60%,transparent) 0 18px,transparent 18px 36px),repeating-linear-gradient(90deg,color-mix(in srgb,var(--c2) 60%,transparent) 0 18px,transparent 18px 36px)}
+.sw-satin{background-image:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.28) 38%,transparent 52%,rgba(255,255,255,.14) 70%,transparent 85%)}
+.sw-quilt{background-image:repeating-linear-gradient(45deg,transparent 0 26px,rgba(0,0,0,.09) 26px 27px),repeating-linear-gradient(-45deg,transparent 0 26px,rgba(0,0,0,.09) 26px 27px),radial-gradient(circle at 50% 50%,rgba(255,255,255,.2),transparent 70%)}
+.sw-herring{background-image:repeating-linear-gradient(45deg,var(--c2) 0 2px,transparent 2px 8px);background-size:16px 100%}
+.sw-voile{background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.25) 0 24px,rgba(0,0,0,.04) 24px 30px,rgba(255,255,255,.1) 30px 50px)}
+.sw-soon{background:repeating-linear-gradient(135deg,transparent 0 12px,var(--line) 12px 13px),var(--surface)}
+.sw-soon::after{display:none}
+
+/* Hero */
+.hero{padding-block:72px 88px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.2vw,5rem);letter-spacing:-.005em}
+.hero h1 em{font-family:var(--f-body);font-style:italic;font-weight:400;color:var(--accent)}
+.hero .copy{display:grid;gap:26px;min-width:0}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.facts{display:flex;gap:28px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--line)}
+.facts div{font-family:var(--f-display);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.facts strong{display:block;font-weight:300;font-size:1.6rem;letter-spacing:.02em;color:var(--ink);text-transform:none}
+.stack{position:relative;aspect-ratio:37/26;max-width:100%}
+.machine{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.machine .body{fill:var(--surface);stroke:var(--ink);stroke-width:1.4;stroke-linejoin:round}
+.machine .line{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+.machine .thin{fill:none;stroke:var(--ink);stroke-width:.8;opacity:.35}
+.machine .spool{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.machine .thread{fill:none;stroke:var(--accent);stroke-width:1.1}
+.machine .cloth{fill:var(--accent-soft);stroke:var(--accent);stroke-width:.8}
+.machine .stitch{stroke:var(--accent);stroke-width:2.2;stroke-dasharray:8 6;stroke-linecap:round;animation:sew .42s linear infinite}
+.machine .brand{font-family:var(--f-display);font-weight:300;font-size:9px;letter-spacing:.2em;fill:var(--muted)}
+.machine .weft{animation:slide .42s linear infinite}
+.machine .needle{animation:needle .42s ease-in-out infinite}
+.machine .wheel{transform-box:fill-box;transform-origin:center;animation:spin 1.68s linear infinite}
+@keyframes sew{to{stroke-dashoffset:14}}
+@keyframes slide{to{transform:translateX(-14px)}}
+@keyframes needle{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+@keyframes spin{to{transform:rotate(-360deg)}}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.hero{padding-block:44px 64px}.stack{max-width:440px;width:100%;margin:0 auto}}
+
+/* Sections */
+section.band{padding-block:96px}
+section.alt{background:var(--surface)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.head > div{display:grid;gap:14px;min-width:0}
+.head > .filters{display:flex}
+@media (max-width:600px){section.band{padding-block:64px}}
+
+/* Catalog */
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{font-family:var(--f-display);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:.6em 1.1em;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.filters button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:28px}
+.card{display:flex;flex-direction:column;gap:14px;min-width:0}
+.card .sw{aspect-ratio:4/5;max-width:100%}
+.card .cat{font-family:var(--f-display);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.card h3{margin-top:-6px}
+.spec{display:grid;gap:2px;font-size:.95rem;color:var(--muted)}
+.spec span{font-variant-numeric:tabular-nums}
+.dots{display:flex;gap:6px}
+.dots i{width:14px;height:14px;border-radius:50%;border:1px solid var(--line);display:block}
+.card .btn{margin-top:auto;justify-content:center;padding:.8em 1em;font-size:.8rem}
+.card .btn.added{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.card.soon h3,.card.soon .spec{color:var(--muted)}
+.soon-mark{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted);font-style:italic;margin-top:32px}
+
+/* Materials */
+.mats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.mat{padding:28px 24px 28px 0;display:grid;gap:12px;align-content:start;border-bottom:1px solid var(--line);min-width:0}
+.mat + .mat{padding-left:24px;border-left:1px solid var(--line)}
+.mat .sw{height:84px}
+.mat dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.92rem}
+.mat dt{font-family:var(--f-display);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:.25em}
+.mat dd{margin:0;font-variant-numeric:tabular-nums}
+.mat p{font-size:.98rem;color:var(--muted)}
+@media (max-width:900px){.mats{grid-template-columns:1fr 1fr}.mat:nth-child(3){padding-left:0;border-left:0}}
+@media (max-width:560px){.mats{grid-template-columns:1fr}.mat,.mat + .mat{padding-left:0;border-left:0}}
+.care{margin-top:48px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+.care .eyebrow{color:var(--muted)}
+.care span{display:inline-flex;align-items:center;gap:10px;font-size:.95rem}
+.care svg{width:30px;height:26px;stroke:var(--ink);fill:none;stroke-width:1.3}
+
+/* Custom */
+.custom{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;gap:4px 0;padding:20px 0;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);grid-row:span 2;font-family:var(--f-display);font-weight:300;font-size:2rem;line-height:1;color:var(--accent)}
+.steps strong{font-family:var(--f-display);font-weight:400;font-size:1.1rem}
+.steps p{color:var(--muted);font-size:1rem}
+.panel{background:var(--bg);border:1px solid var(--line);padding:32px;display:grid;gap:18px}
+section.alt .panel{background:var(--bg)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:6px;font-family:var(--f-display);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font:inherit;font-family:var(--f-body);font-size:1rem;letter-spacing:0;text-transform:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:.7em .8em;border-radius:0;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea{resize:vertical;min-height:110px}
+.unit{position:relative}
+.unit input{padding-right:2.6em}
+.unit::after{content:"cm";position:absolute;right:.8em;bottom:.78em;font-family:var(--f-display);font-size:.85rem;color:var(--muted);letter-spacing:.05em;text-transform:none}
+.hint{font-size:.9rem;color:var(--muted)}
+.flash{font-family:var(--f-display);font-size:.85rem;letter-spacing:.06em;color:var(--ok);min-height:1.3em}
+@media (max-width:860px){.custom{grid-template-columns:1fr;gap:40px}}
+
+
+/* About */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.about .sw{aspect-ratio:5/4;max-width:100%}
+.about .txt{display:grid;gap:20px;min-width:0}
+.about blockquote{margin:0;font-style:italic;font-size:1.45rem;line-height:1.4;max-width:30ch;border-left:2px solid var(--accent);padding-left:20px}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.values div{display:grid;gap:4px}
+.values strong{font-family:var(--f-display);font-weight:400;font-size:1rem;letter-spacing:.04em}
+.values span{font-size:.95rem;color:var(--muted)}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:36px}.values{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+.info{display:grid;gap:22px}
+.info div{display:grid;gap:2px}
+.info .k{font-family:var(--f-display);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.info .v{font-size:1.1rem;user-select:all}
+.picked{border:1px solid var(--line);background:var(--surface)}
+.picked ul{list-style:none;margin:0;padding:0}
+.picked li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:.98rem}
+.picked li:last-child{border-bottom:0}
+.picked li span{min-width:0;overflow-wrap:anywhere}
+.picked button{background:none;border:0;color:var(--muted);cursor:pointer;font-size:1.2rem;line-height:1;padding:4px 6px}
+.picked .empty{padding:14px;color:var(--muted);font-size:.95rem;font-style:italic}
+.result{border:1px solid var(--accent);background:var(--accent-soft);padding:20px;display:grid;gap:12px}
+.result strong{font-family:var(--f-display);font-weight:400;font-size:1.1rem}
+.result textarea{min-height:160px;font-size:.92rem}
+@media (max-width:860px){.contact{grid-template-columns:1fr;gap:40px}}
+
+footer{border-top:1px solid var(--line);padding-block:40px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+/* Mobilna verzija (375px) */
+@media (max-width:600px){
+  body{font-size:17px}
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .top .wrap{height:60px;gap:10px}
+  nav.main{top:60px}
+  .logo{gap:7px}.logo svg{width:26px;height:19px}.logo span{font-size:1.05rem;letter-spacing:.05em}
+  .tools{gap:8px}
+  .lang button{padding:.4em .5em;font-size:.72rem}
+  .bag{padding:.45em .55em}.bag b{margin-left:0}
+  .menu-btn{width:38px;height:38px}
+  .hero{padding-block:32px 48px}
+  .hero .wrap{gap:28px}
+  .hero .copy{gap:20px}
+  .hero h1{font-size:2.45rem}
+  .lead{font-size:1.06rem}
+  .hero .ctas{flex-direction:column}
+  .hero .ctas .btn{justify-content:center}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:16px}
+  .facts div{font-size:.62rem;letter-spacing:.08em;line-height:1.35}
+  .facts strong{font-size:1.15rem;margin-bottom:4px}
+  .stack{max-width:100%}
+  section.band{padding-block:56px}
+  h2{font-size:1.85rem}
+  .head{margin-bottom:28px;gap:18px}
+  .head > div,.head > .lead{width:100%}
+  .filters{flex-wrap:nowrap;overflow-x:auto;width:calc(100% + 32px);max-width:none;margin-inline:-16px;padding-inline:16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .filters::-webkit-scrollbar{display:none}
+  .filters button{flex:none;font-size:.72rem;padding:.55em .9em}
+  .grid{grid-template-columns:1fr 1fr;gap:24px 12px}
+  .card{gap:8px}
+  .card .sw{aspect-ratio:1/1}
+  .card .cat{font-size:.6rem;letter-spacing:.12em}
+  .card h3{font-size:1rem;margin-top:-2px}
+  .spec{font-size:.8rem;line-height:1.4}
+  .dots i{width:11px;height:11px}
+  .card .btn{font-size:.66rem;letter-spacing:.08em;padding:.75em .4em}
+  .soon-mark{font-size:.66rem}
+  .note{margin-top:24px;font-size:.85rem}
+  .mat .sw{height:56px}
+  .mat{padding-block:22px;padding-right:0}
+  .care{margin-top:32px;gap:12px}
+  .custom,.about,.contact{gap:32px}
+  .steps li{grid-template-columns:44px 1fr;padding:16px 0}
+  .steps li::before{font-size:1.6rem}
+  .panel{padding:20px;gap:16px}
+  .about .sw{aspect-ratio:16/9}
+  .about blockquote{font-size:1.2rem}
+  .info{gap:16px}
+  .info .v{font-size:1rem;overflow-wrap:anywhere}
+  .btn{padding:.9em 1.2em;font-size:.82rem}
+  footer .wrap{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:359px){.row{grid-template-columns:1fr}.lang button{padding:.35em .4em}.logo span{font-size:.95rem}}
+footer small{font-family:var(--f-display);font-size:.78rem;letter-spacing:.1em;color:var(--muted)}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 34 24">
+    <g stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none">
+      <path d="M1 1 L33 12"/><path d="M1 4.5 L33 12"/><path d="M1 8 L33 12"/><path d="M1 11.5 L33 12"/>
+      <path d="M1 15 L33 12"/><path d="M1 18.5 L33 12"/><path d="M1 22 L33 12"/><path d="M1 1 L1 22"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#pocetna" aria-label="MANJATEX"><svg><use href="#mark"/></svg><span>MANJATEX</span></a>
+    <nav class="main" id="nav">
+      <a href="#kolekcije" data-i18n="nav_col">Kolekcije</a>
+      <a href="#materijali" data-i18n="nav_mat">Materijali</a>
+      <a href="#po-meri" data-i18n="nav_custom">Po meri</a>
+      <a href="#o-nama" data-i18n="nav_about">O nama</a>
+      <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Jezik / Language">
+        <button type="button" id="lang-sr" aria-pressed="true">SR</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+      </div>
+      <a class="bag" href="#kontakt"><span class="bag-label" data-i18n="bag">Upit</span><b id="bag-count">0</b></a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav">
+        <svg width="18" height="12" viewBox="0 0 18 12" stroke="currentColor" stroke-width="1.4"><path d="M0 1h18M0 6h18M0 11h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="pocetna">
+    <div class="wrap">
+      <div class="copy">
+        <span class="eyebrow" data-i18n="hero_eyebrow">Proizvodnja kućnog tekstila</span>
+        <h1 data-i18n-html="hero_h1">Tekstil za dom, <em>sašiven da traje</em></h1>
+        <p class="lead" data-i18n="hero_lead">Posteljina, jorgani, jastuci, stolnjaci i zavese iz naše radionice. Biramo prirodne materijale, krojimo pažljivo i šijemo i po vašoj meri.</p>
+        <div class="ctas">
+          <a class="btn solid" href="#kolekcije" data-i18n="hero_cta1">Pogledajte kolekcije</a>
+          <a class="btn" href="#po-meri" data-i18n="hero_cta2">Izrada po meri</a>
+        </div>
+        <div class="facts">
+          <div><strong>100%</strong><span data-i18n="fact1">pamuk u posteljini</span></div>
+          <div><strong>40–60 °C</strong><span data-i18n="fact2">pranje bez skupljanja</span></div>
+          <div><strong data-i18n="fact3v">Po meri</strong><span data-i18n="fact3">svaka dimenzija</span></div>
+        </div>
+      </div>
+      <div class="stack" aria-hidden="true">
+        <svg class="machine" viewBox="20 50 370 260">
+          <defs>
+            <clipPath id="left-of-needle"><rect x="0" y="240" width="121" height="40"/></clipPath>
+            <clipPath id="cloth-clip"><rect x="0" y="256" width="400" height="14"/></clipPath>
+          </defs>
+          <!-- tkanina koja klizi -->
+          <rect class="cloth" x="0" y="256" width="400" height="14"/>
+          <g clip-path="url(#cloth-clip)"><g class="weft">
+            <path class="thin" d="M0 256v14M14 256v14M28 256v14M42 256v14M56 256v14M70 256v14M84 256v14M98 256v14M112 256v14M126 256v14M140 256v14M154 256v14M168 256v14M182 256v14M196 256v14M210 256v14M224 256v14M238 256v14M252 256v14M266 256v14M280 256v14M294 256v14M308 256v14M322 256v14M336 256v14M350 256v14M364 256v14M378 256v14M392 256v14M406 256v14"/>
+          </g></g>
+          <line class="stitch" x1="0" y1="263" x2="121" y2="263" clip-path="url(#left-of-needle)"/>
+          <!-- postolje -->
+          <rect class="body" x="40" y="270" width="320" height="22" rx="4"/>
+          <path class="thin" d="M60 281h60M280 281h60"/>
+          <!-- telo mašine -->
+          <path class="body" d="M330 270 L330 132 Q330 105 303 105 L122 105 Q95 105 95 132 L95 196 L148 196 L148 152 L270 152 L270 270 Z"/>
+          <text class="brand" x="209" y="133" text-anchor="middle">MANJATEX</text>
+          <!-- kalem konca -->
+          <line class="line" x1="230" y1="105" x2="230" y2="78"/>
+          <rect class="spool" x="216" y="74" width="28" height="22" rx="2"/>
+          <path class="thin" d="M216 79h28M216 85h28M216 91h28"/>
+          <path class="thread" d="M216 86 C160 84 104 86 101 118 L101 186 Q101 192 108 193 L124 196"/>
+          <!-- točak -->
+          <g class="wheel"><circle class="body" cx="340" cy="160" r="26"/><circle class="line" cx="340" cy="160" r="5"/><path class="thin" d="M340 134v52M314 160h52M321.6 141.6l36.8 36.8M358.4 141.6l-36.8 36.8"/></g>
+          <!-- igla -->
+          <g class="needle">
+            <rect class="body" x="115" y="190" width="10" height="34"/>
+            <line class="line" x1="120" y1="224" x2="120" y2="252"/>
+            <path class="thread" d="M124 196 L121 248"/>
+          </g>
+          <!-- papučica -->
+          <path class="line" d="M104 222 L104 254 L138 254"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="kolekcije">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow" data-i18n="col_eyebrow">Kolekcije</span>
+          <h2 data-i18n="col_h2">Za spavaću sobu, trpezariju i prozore</h2>
+        </div>
+        <div class="filters" id="filters" role="group" aria-label="Filter"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="note" data-i18n="col_note">Pilot verzija: proizvodi, dimenzije i fotografije su primeri i biće zamenjeni pravim.</p>
+    </div>
+  </section>
+
+  <section class="band" id="materijali">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow" data-i18n="mat_eyebrow">Materijali i kvalitet</span>
+          <h2 data-i18n="mat_h2">Znamo od čega je svaki šav</h2>
+        </div>
+        <p class="lead" data-i18n="mat_lead">Za svaki proizvod navodimo sastav, gramaturu i način održavanja, da tačno znate šta dobijate.</p>
+      </div>
+      <div class="mats" id="mats"></div>
+      <div class="care">
+        <span class="eyebrow" data-i18n="care_title">Održavanje</span>
+        <span><svg viewBox="0 0 30 26"><path d="M2 6h26l-3 17H5z"/><path d="M2 6c3 3 5 3 8 0s5-3 8 0 5 3 8 0"/><text x="15" y="19" font-size="7" text-anchor="middle" fill="currentColor" stroke="none" font-family="Jost,sans-serif">40</text></svg><span data-i18n="care1">Pranje na 40 °C, posteljina do 60 °C</span></span>
+        <span><svg viewBox="0 0 30 26"><path d="M4 22h22M8 22c0-8 3-14 7-14s7 6 7 14"/><circle cx="15" cy="17" r="1.2" fill="currentColor"/></svg><span data-i18n="care2">Peglanje na srednjoj temperaturi</span></span>
+        <span><svg viewBox="0 0 30 26"><rect x="4" y="3" width="22" height="20"/><circle cx="15" cy="13" r="6"/></svg><span data-i18n="care3">Sušenje na niskoj temperaturi</span></span>
+        <span><svg viewBox="0 0 30 26"><path d="M15 3l12 20H3z"/><path d="M6 6l18 17M24 6L6 23"/></svg><span data-i18n="care4">Bez izbeljivača</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="po-meri">
+    <div class="wrap custom">
+      <div style="display:grid;gap:22px;min-width:0">
+        <span class="eyebrow" data-i18n="cus_eyebrow">Izrada po meri</span>
+        <h2 data-i18n="cus_h2">Vaše dimenzije, naša mašina za šivenje</h2>
+        <p class="lead" data-i18n="cus_lead">Krevet nestandardne širine, visok dušek, prozor od poda do plafona ili dugačak trpezarijski sto. Pošaljite mere, a mi krojimo.</p>
+        <ol class="steps">
+          <li><strong data-i18n="st1">Izaberite proizvod i tkaninu</strong><p data-i18n="st1p">Iz kolekcije ili prema uzorku koji vam pošaljemo.</p></li>
+          <li><strong data-i18n="st2">Pošaljite mere</strong><p data-i18n="st2p">Širina i dužina u centimetrima, za čaršave i visina dušeka.</p></li>
+          <li><strong data-i18n="st3">Potvrđujemo cenu i rok</strong><p data-i18n="st3p">Odgovaramo na upit sa ponudom i rokom izrade.</p></li>
+          <li><strong data-i18n="st4">Krojimo, šijemo i šaljemo</strong><p data-i18n="st4p">Gotov proizvod stiže na vašu adresu.</p></li>
+        </ol>
+      </div>
+      <form class="panel" id="custom-form" novalidate>
+        <h3 data-i18n="cf_title">Napravite upit po meri</h3>
+        <label for="cf-type"><span data-i18n="cf_type">Proizvod</span>
+          <select id="cf-type"></select>
+        </label>
+        <label for="cf-fabric"><span data-i18n="cf_fabric">Tkanina</span>
+          <select id="cf-fabric"></select>
+        </label>
+        <div class="row">
+          <label for="cf-w"><span data-i18n="cf_w">Širina</span><span class="unit"><input id="cf-w" type="number" inputmode="numeric" min="20" max="800" value="160"></span></label>
+          <label for="cf-l"><span data-i18n="cf_l">Dužina / visina</span><span class="unit"><input id="cf-l" type="number" inputmode="numeric" min="20" max="800" value="200"></span></label>
+        </div>
+        <label for="cf-note"><span data-i18n="cf_note">Napomena</span>
+          <input id="cf-note" type="text" data-i18n-ph="cf_note_ph" placeholder="npr. visina dušeka 28 cm, boja kao uzorak">
+        </label>
+        <p class="hint" data-i18n="cf_hint">Mere unesite u centimetrima. Za zavese merite širinu garnišne i visinu od garnišne do poda.</p>
+        <button class="btn solid" type="submit" data-i18n="cf_add">Dodaj u upit</button>
+        <p class="flash" id="cf-flash" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="band" id="o-nama">
+    <div class="wrap about">
+      <div class="sw sw-linen" style="--c1:#C9B9A3" aria-hidden="true"></div>
+      <div class="txt">
+        <span class="eyebrow" data-i18n="ab_eyebrow">O nama</span>
+        <h2 data-i18n="ab_h2">Radionica u kojoj se tekstil kroji, a ne samo prodaje</h2>
+        <p data-i18n="ab_p1">MANJATEX je domaća firma koja proizvodi kućni tekstil od izbora tkanine do poslednjeg šava. Svaki komad prolazi kroz ruke ljudi koji ga kroje, šiju i pakuju.</p>
+        <blockquote data-i18n="ab_q">Dobra posteljina se ne primećuje. Samo se bolje spava.</blockquote>
+        <div class="values">
+          <div><strong data-i18n="v1">Domaća proizvodnja</strong><span data-i18n="v1p">Krojimo i šijemo u sopstvenoj radionici.</span></div>
+          <div><strong data-i18n="v2">Provereni materijali</strong><span data-i18n="v2p">Tkanine biramo po sastavu i gramaturi.</span></div>
+          <div><strong data-i18n="v3">Lični pristup</strong><span data-i18n="v3p">Na svaki upit odgovara čovek, ne automat.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="kontakt">
+    <div class="wrap contact">
+      <div class="info">
+        <span class="eyebrow" data-i18n="ct_eyebrow">Kontakt</span>
+        <h2 data-i18n="ct_h2">Pošaljite upit</h2>
+        <p class="lead" data-i18n="ct_lead">Izaberite proizvode iz kolekcije ili dodajte upit po meri, a mi vam odgovaramo sa ponudom.</p>
+        <div><span class="k" data-i18n="ct_phone">Telefon</span><span class="v">+381 60 000 0000</span></div>
+        <div><span class="k">Email</span><span class="v">info@manjatex.rs</span></div>
+        <div><span class="k" data-i18n="ct_addr">Adresa</span><span class="v" data-i18n="ct_addr_v">Ulica i broj, Grad, Srbija</span></div>
+        <div><span class="k" data-i18n="ct_hours">Radno vreme</span><span class="v" data-i18n="ct_hours_v">Pon–Pet 08–16 h, Sub 09–13 h</span></div>
+        <div><span class="k">Instagram</span><span class="v">@manjatex</span></div>
+      </div>
+      <form class="panel" id="inq-form" novalidate>
+        <div style="display:grid;gap:8px">
+          <span class="eyebrow" style="color:var(--muted)" data-i18n="inq_list">Vaš upit</span>
+          <div class="picked" id="picked"></div>
+        </div>
+        <div class="row">
+          <label for="f-name"><span data-i18n="f_name">Ime i prezime</span><input id="f-name" type="text" autocomplete="name" required></label>
+          <label for="f-phone"><span data-i18n="ct_phone">Telefon</span><input id="f-phone" type="tel" autocomplete="tel"></label>
+        </div>
+        <label for="f-email">Email<input id="f-email" type="email" autocomplete="email" required></label>
+        <label for="f-msg"><span data-i18n="f_msg">Poruka</span><textarea id="f-msg" data-i18n-ph="f_msg_ph" placeholder="Količina, boja, rok, pitanja…"></textarea></label>
+        <p class="flash" id="f-err" style="color:#B5482F" aria-live="polite"></p>
+        <button class="btn solid" type="submit" data-i18n="f_send">Pripremi upit</button>
+        <div class="result" id="result" hidden>
+          <strong data-i18n="r_title">Upit je spreman</strong>
+          <p class="hint" data-i18n="r_hint">Pilot verzija: upit se još ne šalje automatski. Kopirajte tekst i pošaljite ga na info@manjatex.rs.</p>
+          <textarea id="r-text" readonly aria-label="Tekst upita"></textarea>
+          <button class="btn" type="button" id="r-copy" data-i18n="r_copy">Kopiraj tekst</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#pocetna"><svg><use href="#mark"/></svg><span>MANJATEX</span></a>
+    <small>© 2026 MANJATEX · <span data-i18n="foot">Kućni tekstil</span></small>
+  </div>
+</footer>
+
+<script>
+(function(){
+const T={
+sr:{nav_col:"Kolekcije",nav_mat:"Materijali",nav_custom:"Po meri",nav_about:"O nama",nav_contact:"Kontakt",bag:"Upit",
+hero_eyebrow:"Proizvodnja kućnog tekstila",hero_h1:"Tekstil za dom, <em>sašiven da traje</em>",
+hero_lead:"Posteljina, jorgani, jastuci, stolnjaci i zavese iz naše radionice. Biramo prirodne materijale, krojimo pažljivo i šijemo i po vašoj meri.",
+hero_cta1:"Pogledajte kolekcije",hero_cta2:"Izrada po meri",fact1:"pamuk u posteljini",fact2:"pranje bez skupljanja",fact3v:"Po meri",fact3:"svaka dimenzija",
+tag_k:"Ranfors · 140 g/m²",tag_v:"Mekan od prvog pranja",
+col_eyebrow:"Kolekcije",col_h2:"Za spavaću sobu, trpezariju i prozore",col_note:"Pilot verzija: proizvodi, dimenzije i fotografije su primeri i biće zamenjeni pravim.",
+all:"Sve",add:"Dodaj u upit",added:"U upitu ✓",soon:"Uskoro",soon_t:"Nova kolekcija",soon_p:"Mesto za sledeću liniju proizvoda.",
+mat_eyebrow:"Materijali i kvalitet",mat_h2:"Znamo od čega je svaki šav",mat_lead:"Za svaki proizvod navodimo sastav, gramaturu i način održavanja, da tačno znate šta dobijate.",
+k_comp:"Sastav",k_weight:"Gramatura",k_for:"Za",
+care_title:"Održavanje",care1:"Pranje na 40 °C, posteljina do 60 °C",care2:"Peglanje na srednjoj temperaturi",care3:"Sušenje na niskoj temperaturi",care4:"Bez izbeljivača",
+cus_eyebrow:"Izrada po meri",cus_h2:"Vaše dimenzije, naša mašina za šivenje",cus_lead:"Krevet nestandardne širine, visok dušek, prozor od poda do plafona ili dugačak trpezarijski sto. Pošaljite mere, a mi krojimo.",
+st1:"Izaberite proizvod i tkaninu",st1p:"Iz kolekcije ili prema uzorku koji vam pošaljemo.",st2:"Pošaljite mere",st2p:"Širina i dužina u centimetrima, za čaršave i visina dušeka.",
+st3:"Potvrđujemo cenu i rok",st3p:"Odgovaramo na upit sa ponudom i rokom izrade.",st4:"Krojimo, šijemo i šaljemo",st4p:"Gotov proizvod stiže na vašu adresu.",
+cf_title:"Napravite upit po meri",cf_type:"Proizvod",cf_fabric:"Tkanina",cf_w:"Širina",cf_l:"Dužina / visina",cf_note:"Napomena",cf_note_ph:"npr. visina dušeka 28 cm, boja kao uzorak",
+cf_hint:"Mere unesite u centimetrima. Za zavese merite širinu garnišne i visinu od garnišne do poda.",cf_add:"Dodaj u upit",cf_ok:"Dodato u upit.",cf_bad:"Unesite mere između 20 i 800 cm.",
+custom_prefix:"Po meri",
+ab_eyebrow:"O nama",ab_h2:"Radionica u kojoj se tekstil kroji, a ne samo prodaje",
+ab_p1:"MANJATEX je domaća firma koja proizvodi kućni tekstil od izbora tkanine do poslednjeg šava. Svaki komad prolazi kroz ruke ljudi koji ga kroje, šiju i pakuju.",
+ab_q:"Dobra posteljina se ne primećuje. Samo se bolje spava.",v1:"Domaća proizvodnja",v1p:"Krojimo i šijemo u sopstvenoj radionici.",v2:"Provereni materijali",v2p:"Tkanine biramo po sastavu i gramaturi.",v3:"Lični pristup",v3p:"Na svaki upit odgovara čovek, ne automat.",
+ct_eyebrow:"Kontakt",ct_h2:"Pošaljite upit",ct_lead:"Izaberite proizvode iz kolekcije ili dodajte upit po meri, a mi vam odgovaramo sa ponudom.",
+ct_phone:"Telefon",ct_addr:"Adresa",ct_addr_v:"Ulica i broj, Grad, Srbija",ct_hours:"Radno vreme",ct_hours_v:"Pon–Pet 08–16 h, Sub 09–13 h",
+inq_list:"Vaš upit",empty:"Još niste dodali proizvode. Upit možete poslati i samo sa porukom.",remove:"Ukloni",
+f_name:"Ime i prezime",f_msg:"Poruka",f_msg_ph:"Količina, boja, rok, pitanja…",f_send:"Pripremi upit",f_err:"Unesite ime i ispravnu email adresu.",
+r_title:"Upit je spreman",r_hint:"Pilot verzija: upit se još ne šalje automatski. Kopirajte tekst i pošaljite ga na info@manjatex.rs.",r_copy:"Kopiraj tekst",r_copied:"Kopirano ✓",
+r_hello:"Poštovani,\nželeo/la bih ponudu za sledeće:",r_items:"Proizvodi:",r_msg:"Poruka:",r_contact:"Kontakt:",foot:"Kućni tekstil"},
+en:{nav_col:"Collections",nav_mat:"Materials",nav_custom:"Made to measure",nav_about:"About",nav_contact:"Contact",bag:"Inquiry",
+hero_eyebrow:"Home textile manufacturer",hero_h1:"Home textiles, <em>sewn to last</em>",
+hero_lead:"Bed linen, duvets, pillows, tablecloths and curtains from our own workshop. We choose natural materials, cut with care and sew to your measurements.",
+hero_cta1:"Browse collections",hero_cta2:"Made to measure",fact1:"cotton bed linen",fact2:"washable, no shrinking",fact3v:"Custom",fact3:"any dimension",
+tag_k:"Renforcé · 140 g/m²",tag_v:"Soft from the first wash",
+col_eyebrow:"Collections",col_h2:"For the bedroom, dining room and windows",col_note:"Pilot version: products, sizes and photos are examples and will be replaced.",
+all:"All",add:"Add to inquiry",added:"In inquiry ✓",soon:"Coming soon",soon_t:"New collection",soon_p:"A place for the next product line.",
+mat_eyebrow:"Materials & quality",mat_h2:"We know what every seam is made of",mat_lead:"Every product lists its composition, fabric weight and care, so you know exactly what you get.",
+k_comp:"Fibre",k_weight:"Weight",k_for:"For",
+care_title:"Care",care1:"Wash at 40 °C, bed linen up to 60 °C",care2:"Iron at medium heat",care3:"Tumble dry low",care4:"Do not bleach",
+cus_eyebrow:"Made to measure",cus_h2:"Your dimensions, our sewing machines",cus_lead:"An unusually wide bed, a deep mattress, floor-to-ceiling windows or a long dining table. Send your measurements and we cut to fit.",
+st1:"Choose a product and fabric",st1p:"From the collection or from a sample we send you.",st2:"Send your measurements",st2p:"Width and length in centimetres, plus mattress depth for fitted sheets.",
+st3:"We confirm price and lead time",st3p:"We reply to your inquiry with a quote and delivery date.",st4:"We cut, sew and ship",st4p:"The finished piece arrives at your door.",
+cf_title:"Request a custom piece",cf_type:"Product",cf_fabric:"Fabric",cf_w:"Width",cf_l:"Length / drop",cf_note:"Note",cf_note_ph:"e.g. mattress depth 28 cm, colour as sample",
+cf_hint:"Enter measurements in centimetres. For curtains, measure the rail width and the drop from rail to floor.",cf_add:"Add to inquiry",cf_ok:"Added to inquiry.",cf_bad:"Enter measurements between 20 and 800 cm.",
+custom_prefix:"Custom",
+ab_eyebrow:"About us",ab_h2:"A workshop where textiles are made, not just sold",
+ab_p1:"MANJATEX is a local company producing home textiles from fabric selection to the final seam. Every piece passes through the hands of the people who cut, sew and pack it.",
+ab_q:"You don't notice good bed linen. You just sleep better.",v1:"Made locally",v1p:"Cut and sewn in our own workshop.",v2:"Tested materials",v2p:"Fabrics chosen by composition and weight.",v3:"Personal service",v3p:"Every inquiry is answered by a person.",
+ct_eyebrow:"Contact",ct_h2:"Send an inquiry",ct_lead:"Pick products from the collection or add a custom request, and we'll reply with a quote.",
+ct_phone:"Phone",ct_addr:"Address",ct_addr_v:"Street and number, City, Serbia",ct_hours:"Opening hours",ct_hours_v:"Mon–Fri 8 am–4 pm, Sat 9 am–1 pm",
+inq_list:"Your inquiry",empty:"No products added yet. You can also send an inquiry with just a message.",remove:"Remove",
+f_name:"Full name",f_msg:"Message",f_msg_ph:"Quantity, colour, deadline, questions…",f_send:"Prepare inquiry",f_err:"Enter your name and a valid email address.",
+r_title:"Your inquiry is ready",r_hint:"Pilot version: inquiries are not sent automatically yet. Copy the text and email it to info@manjatex.rs.",r_copy:"Copy text",r_copied:"Copied ✓",
+r_hello:"Hello,\nI would like a quote for the following:",r_items:"Products:",r_msg:"Message:",r_contact:"Contact:",foot:"Home textiles"}
+};
+const CATS=[{id:"bed",sr:"Posteljina",en:"Bed linen"},{id:"duvet",sr:"Jorgani i jastuci",en:"Duvets & pillows"},{id:"table",sr:"Stolnjaci i zavese",en:"Table & window"},{id:"soon",sr:"Uskoro",en:"Coming soon"}];
+const P=[
+{id:"p1",cat:"bed",pat:"linen",c:["#E7DFD2","#D6CBB9"],sr:"Komplet Lan",en:"Lan set",m:{sr:"100% pamuk, ranfors 140 g/m²",en:"100% cotton renforcé, 140 g/m²"},d:"140×200 · 160×220 · 200×220 cm",cols:["#E7DFD2","#9AA585","#B7A58C"]},
+{id:"p2",cat:"bed",pat:"satin",c:["#C6CBC2","#AEB4AA"],sr:"Satenski komplet Noć",en:"Noć satin set",m:{sr:"Pamučni saten, 300 niti",en:"Cotton sateen, 300 thread count"},d:"140×200 · 200×220 cm",cols:["#C6CBC2","#6E6A78","#EFEAE2"]},
+{id:"p3",cat:"bed",pat:"stripe",c:["#EEE9E1","#BFB3A2"],sr:"Prugasti komplet Sava",en:"Sava striped set",m:{sr:"Krep pamuk, ne zahteva peglanje",en:"Cotton crepe, no ironing needed"},d:"140×200 · 160×220 cm",cols:["#BFB3A2","#8E9A78","#9FB0BF"]},
+{id:"p4",cat:"bed",pat:"linen",c:["#D8C7B4","#C4B19B"],sr:"Čaršav sa lastišem",en:"Fitted sheet",m:{sr:"100% pamuk, za dušek do 30 cm",en:"100% cotton, mattress up to 30 cm"},d:"90×200 · 160×200 · 180×200 cm",cols:["#D8C7B4","#F2EDE4","#8E9A78","#6F6259"]},
+{id:"p5",cat:"duvet",pat:"quilt",c:["#F1ECE4","#DED5C7"],sr:"Jorgan Zima",en:"Zima winter duvet",m:{sr:"Silikonizirano vlakno, 400 g/m²",en:"Siliconised fibre, 400 g/m²"},d:"140×200 · 200×200 cm",cols:["#F1ECE4"]},
+{id:"p6",cat:"duvet",pat:"quilt",c:["#E6E2D6","#D2CCBC"],sr:"Jorgan Leto",en:"Leto summer duvet",m:{sr:"Silikonizirano vlakno, 200 g/m²",en:"Siliconised fibre, 200 g/m²"},d:"140×200 · 200×200 cm",cols:["#E6E2D6"]},
+{id:"p7",cat:"duvet",pat:"satin",c:["#F4F0E9","#E1DACE"],sr:"Jastuk Klasik",en:"Klasik pillow",m:{sr:"Pamučna navlaka, 800 g punjenja",en:"Cotton cover, 800 g filling"},d:"50×70 · 60×80 cm",cols:["#F4F0E9"]},
+{id:"p8",cat:"duvet",pat:"herring",c:["#A9B096","#8F977C"],sr:"Ukrasni jastuk Riblja kost",en:"Herringbone cushion",m:{sr:"Pamuk i lan, skidiva navlaka",en:"Cotton-linen, removable cover"},d:"40×40 · 50×50 cm",cols:["#A9B096","#C9B9A3","#6F6259"]},
+{id:"p9",cat:"table",pat:"check",c:["#F2EDE4","#B98F7E"],sr:"Stolnjak Karo",en:"Karo check tablecloth",m:{sr:"Pamuk / poliester 50/50",en:"Cotton / polyester 50/50"},d:"140×180 · 140×240 cm",cols:["#B98F7E","#8E9A78","#7F93A6"]},
+{id:"p10",cat:"table",pat:"linen",c:["#CDBFA9","#B9A88E"],sr:"Laneni stolnjak",en:"Linen tablecloth",m:{sr:"100% lan, 190 g/m²",en:"100% linen, 190 g/m²"},d:"150×250 · 150×300 cm",cols:["#CDBFA9","#F2EDE4"]},
+{id:"p11",cat:"table",pat:"voile",c:["#EFEBE4","#E2DCD2"],sr:"Zavesa Voal",en:"Voile curtain",m:{sr:"Poliester voal, prozračan",en:"Polyester voile, sheer"},d:"Visina 250 / 280 cm · širina po meri",den:"Drop 250 / 280 cm · width to measure",cols:["#EFEBE4","#D8C7B4"]},
+{id:"p12",cat:"table",pat:"linen",c:["#8C8577","#77705F"],sr:"Zavesa Platno",en:"Platno curtain",m:{sr:"Pamuk i lan, delimično zamračenje",en:"Cotton-linen, dim-out"},d:"Visina 250 / 280 cm · širina po meri",den:"Drop 250 / 280 cm · width to measure",cols:["#8C8577","#B7A58C","#56653F"]},
+{id:"s1",cat:"soon",soon:true},{id:"s2",cat:"soon",soon:true}
+];
+const MATS=[
+{pat:"linen",c:["#E7DFD2"],sr:{t:"Ranfors",p:"Gusto tkan pamuk, mat i mekan. Najčešći izbor za svakodnevnu posteljinu.",comp:"100% pamuk",for:"posteljina"},en:{t:"Renforcé",p:"Tightly woven matte cotton, soft and durable. The everyday bed linen choice.",comp:"100% cotton",for:"bed linen"},w:"130–145 g/m²"},
+{pat:"satin",c:["#C6CBC2"],sr:{t:"Pamučni saten",p:"Blag sjaj i glatka površina. Hladan na dodir, idealan za leto.",comp:"100% pamuk",for:"posteljina"},en:{t:"Cotton sateen",p:"A gentle sheen and smooth hand. Cool to the touch, great for summer.",comp:"100% cotton",for:"bed linen"},w:"120–130 g/m²"},
+{pat:"quilt",c:["#F1ECE4"],sr:{t:"Punjenje",p:"Silikonizirano vlakno ne gubi oblik i pere se u mašini.",comp:"poliester vlakno",for:"jorgani, jastuci"},en:{t:"Filling",p:"Siliconised fibre keeps its loft and is machine washable.",comp:"polyester fibre",for:"duvets, pillows"},w:"200–400 g/m²"},
+{pat:"linen",c:["#CDBFA9"],sr:{t:"Lan",p:"Prirodna tekstura koja s pranjem postaje mekša. Za stolnjake i zavese.",comp:"lan / pamuk-lan",for:"stolnjaci, zavese"},en:{t:"Linen",p:"Natural texture that softens with every wash. For tablecloths and curtains.",comp:"linen / cotton-linen",for:"table, curtains"},w:"180–220 g/m²"}
+];
+const CUSTOM_TYPES=[{sr:"Posteljina",en:"Bed linen set"},{sr:"Čaršav sa lastišem",en:"Fitted sheet"},{sr:"Jorgan",en:"Duvet"},{sr:"Stolnjak",en:"Tablecloth"},{sr:"Zavesa",en:"Curtain"}];
+const FABRICS=[{sr:"Ranfors",en:"Renforcé"},{sr:"Pamučni saten",en:"Cotton sateen"},{sr:"Krep pamuk",en:"Cotton crepe"},{sr:"Lan",en:"Linen"},{sr:"Voal",en:"Voile"}];
+
+let lang="sr",filter="all",items=[];
+const $=s=>document.querySelector(s);
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+lang=store.get("mx_lang")==="en"?"en":"sr";
+items=Array.isArray(store.get("mx_items"))?store.get("mx_items"):[];
+const t=k=>T[lang][k]??k;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>el.placeholder=t(el.dataset.i18nPh));
+  $("#lang-sr").setAttribute("aria-pressed",lang==="sr");$("#lang-en").setAttribute("aria-pressed",lang==="en");
+  renderFilters();renderGrid();renderMats();renderSelects();renderPicked();
+}
+function renderFilters(){
+  const opts=[{id:"all",sr:T.sr.all,en:T.en.all},...CATS.filter(c=>c.id!=="soon")];
+  $("#filters").innerHTML=opts.map(o=>`<button type="button" data-f="${o.id}" aria-pressed="${filter===o.id}">${esc(o[lang])}</button>`).join("");
+}
+function renderGrid(){
+  const list=P.filter(p=>filter==="all"||p.cat===filter||p.soon&&filter==="all");
+  $("#grid").innerHTML=list.map(p=>{
+    if(p.soon) return `<article class="card soon"><div class="sw sw-soon"><span class="soon-mark">${t("soon")}</span></div><span class="cat">${t("soon")}</span><h3>${t("soon_t")}</h3><div class="spec"><span>${t("soon_p")}</span></div></article>`;
+    const cat=CATS.find(c=>c.id===p.cat)[lang], name=p[lang], inBag=items.some(i=>i.id===p.id);
+    return `<article class="card"><div class="sw sw-${p.pat}" style="--c1:${p.c[0]};--c2:${p.c[1]}" role="img" aria-label="${esc(name)}"></div>
+      <span class="cat">${esc(cat)}</span><h3>${esc(name)}</h3>
+      <div class="spec"><span>${esc(p.m[lang])}</span><span>${esc(lang==="en"&&p.den?p.den:p.d)}</span></div>
+      <div class="dots">${p.cols.map(c=>`<i style="background:${c}"></i>`).join("")}</div>
+      <button type="button" class="btn${inBag?" added":""}" data-add="${p.id}" aria-pressed="${inBag}">${inBag?t("added"):t("add")}</button></article>`;
+  }).join("");
+}
+function renderMats(){
+  $("#mats").innerHTML=MATS.map(m=>{const x=m[lang];return `<div class="mat"><div class="sw sw-${m.pat}" style="--c1:${m.c[0]}" aria-hidden="true"></div><h3>${x.t}</h3><p>${x.p}</p>
+  <dl><dt>${t("k_comp")}</dt><dd>${x.comp}</dd><dt>${t("k_weight")}</dt><dd>${m.w}</dd><dt>${t("k_for")}</dt><dd>${x.for}</dd></dl></div>`}).join("");
+}
+function renderSelects(){
+  const a=$("#cf-type").selectedIndex,b=$("#cf-fabric").selectedIndex;
+  $("#cf-type").innerHTML=CUSTOM_TYPES.map((o,i)=>`<option value="${i}">${o[lang]}</option>`).join("");
+  $("#cf-fabric").innerHTML=FABRICS.map((o,i)=>`<option value="${i}">${o[lang]}</option>`).join("");
+  $("#cf-type").selectedIndex=Math.max(0,a);$("#cf-fabric").selectedIndex=Math.max(0,b);
+}
+function label(i){
+  if(i.id){const p=P.find(x=>x.id===i.id);return p?p[lang]:i.id}
+  return `${t("custom_prefix")}: ${CUSTOM_TYPES[i.type][lang]}, ${FABRICS[i.fab][lang]}, ${i.w}×${i.l} cm${i.note?" ("+i.note+")":""}`;
+}
+function renderPicked(){
+  $("#bag-count").textContent=items.length;
+  $("#picked").innerHTML=items.length?`<ul>${items.map((i,n)=>`<li><span>${esc(label(i))}</span><button type="button" data-rm="${n}" aria-label="${t("remove")}">×</button></li>`).join("")}</ul>`:`<p class="empty">${t("empty")}</p>`;
+  store.set("mx_items",items);
+}
+
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-f]");if(f){filter=f.dataset.f;renderFilters();renderGrid();return}
+  const a=e.target.closest("[data-add]");if(a){const id=a.dataset.add,k=items.findIndex(i=>i.id===id);k>=0?items.splice(k,1):items.push({id});renderGrid();renderPicked();return}
+  const r=e.target.closest("[data-rm]");if(r){items.splice(+r.dataset.rm,1);renderPicked();renderGrid();return}
+  if(e.target.closest("#nav a")){$("#nav").classList.remove("open");$("#menu-btn").setAttribute("aria-expanded","false")}
+});
+$("#menu-btn").addEventListener("click",()=>{const o=$("#nav").classList.toggle("open");$("#menu-btn").setAttribute("aria-expanded",o)});
+$("#lang-sr").addEventListener("click",()=>{lang="sr";store.set("mx_lang",lang);applyLang()});
+$("#lang-en").addEventListener("click",()=>{lang="en";store.set("mx_lang",lang);applyLang()});
+
+$("#custom-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const w=+$("#cf-w").value,l=+$("#cf-l").value,fl=$("#cf-flash");
+  if(!(w>=20&&w<=800&&l>=20&&l<=800)){fl.style.color="#B5482F";fl.textContent=t("cf_bad");return}
+  items.push({type:+$("#cf-type").value,fab:+$("#cf-fabric").value,w,l,note:$("#cf-note").value.trim()});
+  renderPicked();fl.style.color="";fl.textContent=t("cf_ok");$("#cf-note").value="";
+  setTimeout(()=>{fl.textContent=""},2500);
+});
+$("#inq-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=$("#f-name").value.trim(),email=$("#f-email").value.trim(),phone=$("#f-phone").value.trim(),msg=$("#f-msg").value.trim();
+  if(!name||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){$("#f-err").textContent=t("f_err");return}
+  $("#f-err").textContent="";
+  let txt=t("r_hello")+"\n\n";
+  if(items.length) txt+=t("r_items")+"\n"+items.map(i=>"• "+label(i)).join("\n")+"\n\n";
+  if(msg) txt+=t("r_msg")+"\n"+msg+"\n\n";
+  txt+=t("r_contact")+"\n"+name+"\n"+email+(phone?"\n"+phone:"");
+  $("#r-text").value=txt;$("#result").hidden=false;$("#result").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+$("#r-copy").addEventListener("click",()=>{
+  const ta=$("#r-text"),b=$("#r-copy");
+  const done=()=>{b.textContent=t("r_copied");setTimeout(()=>b.textContent=t("r_copy"),2000)};
+  try{navigator.clipboard.writeText(ta.value).then(done,()=>{ta.select();})}catch(err){ta.select()}
+});
+applyLang();
+})();
+
+
+</script>
+
+</body>
+</html>
